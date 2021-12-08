@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to the Adoption Center</title>
+</head>
+<body>
+<div id="listPets">
+    <h3>List all pets</h3>
+    <table>
+        <thead>
+            <tr>Name: </tr>
+            <tr>Age: </tr>
+        </thead>
+        <tr th:each="pet : ${pets}">
+            <td><span th:text="${pet.name}"></span></td>
+            <td><span th:text="${pet.age}"></span></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

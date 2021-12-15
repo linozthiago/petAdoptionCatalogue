@@ -7,23 +7,18 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * Created by linoz on 9/30/21
+ * Created by linoz on 12/9/21
  */
-
 @NoArgsConstructor
 @Getter
 @Setter
-@Document(collection = "pets")
-public class Pet {
+@Document(collection = "petsCategory")
+public class PetCategory {
     @Id
     private String id;
     private String name;
-    private PetCategory type;
-    private int age;
 
-    public Pet(String name, PetCategory type, int age) {
+    public PetCategory(String name) {
         this.name = name;
-        this.type = type;
-        this.age = age;
     }
 }

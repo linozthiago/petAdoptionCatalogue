@@ -21,25 +21,21 @@ import java.util.List;
  * Created by linoz on 10/6/21
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/pets")
 @RequiredArgsConstructor
 public class PetController {
 
     @Autowired
-    final private PetService service;
+    private final PetService service;
 
     @GetMapping("/all")
-    public List<Pet> listAllPets(Model model) {
-        final List<Pet> petsList = service.findAll();
-
-        return petsList;
+    public List<Pet> listAllPets() {
+        return service.findAll();
     }
 
     @GetMapping("/searchFor/{name}")
     public List<Pet> findByName(@PathVariable("name") String name) {
-        final List<Pet> petsByName = service.findByName(name);
-
-        return petsByName;
+        return service.findByName(name);
     }
 
     @PostMapping("/create")

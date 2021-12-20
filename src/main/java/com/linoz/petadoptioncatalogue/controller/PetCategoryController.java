@@ -1,6 +1,7 @@
 package com.linoz.petadoptioncatalogue.controller;
 
 import com.linoz.petadoptioncatalogue.domain.PetCategory;
+import com.linoz.petadoptioncatalogue.dto.PetCategoryDTO;
 import com.linoz.petadoptioncatalogue.service.PetCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +32,18 @@ public class PetCategoryController {
     }
 
     @PostMapping("/create")
-    public void create(@RequestBody PetCategory category) {
-        service.save(category);
+    public void create(@RequestBody PetCategoryDTO categoryDTO) {
+        service.save(categoryDTO.exchangeToCretaPetCategory());
     }
 
     @PutMapping("/update")
-    public void update(@RequestBody PetCategory category) {
-        service.update(category);
+    public void update(@RequestBody PetCategoryDTO categoryDTO) {
+        service.update(categoryDTO.exchangeToUpdateOrDeletePetCategory());
     }
 
     @DeleteMapping("/remove")
-    public void remove(@RequestBody PetCategory category) {
-        service.delete(category);
+    public void remove(@RequestBody PetCategoryDTO categoryDTO) {
+        service.delete(categoryDTO.exchangeToUpdateOrDeletePetCategory());
     }
 
 }

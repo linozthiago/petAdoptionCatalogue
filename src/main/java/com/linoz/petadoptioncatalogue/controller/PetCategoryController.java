@@ -32,18 +32,18 @@ public class PetCategoryController {
     }
 
     @PostMapping("/create")
-    public void create(@RequestBody PetCategoryDTO categoryDTO) {
-        service.save(categoryDTO.exchangeToCretaPetCategory());
+    public void create(@RequestBody PetCategoryDTO petCategoryDTO) {
+        service.save(petCategoryDTO.createPetCategory());
     }
 
     @PutMapping("/update")
-    public void update(@RequestBody PetCategoryDTO categoryDTO) {
-        service.update(categoryDTO.exchangeToUpdateOrDeletePetCategory());
+    public void update(@RequestBody PetCategoryDTO petCategoryDTO) {
+        service.update(petCategoryDTO.updatePetCategory());
     }
 
     @DeleteMapping("/remove")
-    public void remove(@RequestBody PetCategoryDTO categoryDTO) {
-        service.delete(categoryDTO.exchangeToUpdateOrDeletePetCategory());
+    public void remove(@RequestBody PetCategoryDTO petCategoryDTO) {
+        service.delete(petCategoryDTO.deletePetCategory());
     }
 
 }

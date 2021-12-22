@@ -40,17 +40,16 @@ public class PetController {
 
     @PostMapping("/create")
     public void create(@RequestBody PetDTO petDTO) {
-        service.save(petDTO.exchangeToCreatePet());
+        service.save(petDTO.createPet().build());
     }
 
     @DeleteMapping("/remove")
-    @ResponseBody
     public void remove(@RequestBody PetDTO petDTO) {
-        service.delete(petDTO.exchangeToUpdateOrRemovePet());
+        service.delete(petDTO.removePet().build());
     }
 
     @PutMapping("/update")
     public void update(@RequestBody PetDTO petDTO) {
-        service.update(petDTO.exchangeToUpdateOrRemovePet());
+        service.update(petDTO.updatePet().build());
     }
 }

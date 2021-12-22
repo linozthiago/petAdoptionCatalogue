@@ -1,5 +1,7 @@
 package com.linoz.petadoptioncatalogue.dto;
 
+import com.linoz.petadoptioncatalogue.builder.PetBuilder;
+import com.linoz.petadoptioncatalogue.builder.PetBuilderImpl;
 import com.linoz.petadoptioncatalogue.domain.Pet;
 import com.linoz.petadoptioncatalogue.domain.PetCategory;
 import lombok.Getter;
@@ -15,21 +17,56 @@ public class PetDTO {
     private PetCategory type;
     private int age;
 
-    /**
-     * create a new pet
-     *
-     * @return Pet
-     */
-    public Pet exchangeToCreatePet() {
-        return new Pet(name, type, age);
+    private PetBuilder petBuilder;
+
+    public PetDTO() {
+        this.petBuilder = new PetBuilderImpl();
     }
 
     /**
-     * update or delete the pet
+     * builder of a new pet
+     *
+     * @return this
+     */
+    public PetDTO createPet() {
+        petBuilder.buildName(name);
+        petBuilder.buildType(type);
+        petBuilder.buildAge(age);
+
+        return this;
+    }
+
+    /**
+     * builder of a pet to update
+     *
+     * @return this
+     */
+    public PetDTO updatePet() {
+        petBuilder.buildId(id);
+        petBuilder.buildName(name);
+        petBuilder.buildType(type);
+        petBuilder.buildAge(age);
+
+        return this;
+    }
+
+    /**
+     * builder of a pet to remove
+     *
+     * @return this
+     */
+    public PetDTO removePet() {
+        petBuilder.buildId(id);
+
+        return this;
+    }
+
+    /**
+     * build the pet from builders
      *
      * @return Pet
      */
-    public Pet exchangeToUpdateOrRemovePet() {
-        return new Pet(id, name, type, age);
+    public Pet build() {
+        return petBuilder.getPet();
     }
 }

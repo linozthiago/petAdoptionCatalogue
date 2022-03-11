@@ -8,6 +8,9 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by linoz on 12/9/21
  */
@@ -20,6 +23,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class PetCategory {
     @Id
     private String id;
+    @NotEmpty(message="The pet category name cannot be empty")
+    @NotNull(message="The pet category name cannot be null")
     private String name;
 
     public PetCategory(String name) {

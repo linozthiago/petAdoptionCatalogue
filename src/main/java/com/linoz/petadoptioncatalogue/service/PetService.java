@@ -1,54 +1,51 @@
 package com.linoz.petadoptioncatalogue.service;
 
+import com.linoz.petadoptioncatalogue.domain.Pet;
 import com.linoz.petadoptioncatalogue.domain.PetCategory;
 import com.linoz.petadoptioncatalogue.exception.NotFoundRequestException;
-import com.linoz.petadoptioncatalogue.domain.Pet;
 import com.linoz.petadoptioncatalogue.repository.PetCategoryRepository;
 import com.linoz.petadoptioncatalogue.repository.PetRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by linoz on 10/4/21
  */
 @Service
+@RequiredArgsConstructor
 public class PetService {
 
-    @Autowired
-    private PetRepository petRepository;
+    private final PetRepository petRepository;
+    private final PetCategoryRepository categoryRepository;
 
-    @Autowired
-    private PetCategoryRepository categoryRepository;
+    public Pet save(Pet pet) {
+        findCategory(pet.getType().getId());
 
-    public void save(Pet pet) {
-        final PetCategory categoryFound = findCategory(pet.getType().getId());
-        if (categoryFound != null) {
-            petRepository.save(pet);
-        }
+        return petRepository.save(pet);
     }
 
     public List<Pet> findAll() {
         return petRepository.findAll();
     }
 
-    public List<Pet> findByName(String name) {
-        return petRepository.findPetByName(name);
+    public List<Pet> findPetByName(String name) {
+        return petRepository.findByName(name);
      }
 
     public void delete (Pet pet) {
-        final Pet petFound = findById(pet.getId());
-        if(petFound != null) {
-            petRepository.delete(pet);
-        }
+        findById(pet.getId());
+
+        petRepository.delete(pet);
     }
 
     public void update(Pet pet) {
-        final Pet petFound = findById(pet.getId());
-        if(petFound != null) {
-            save(pet);
-        }
+        findById(pet.getId());
+        findCategory(pet.getType().getId());
+
+        petRepository.save(pet);
     }
 
     private Pet findById(String id) {

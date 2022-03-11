@@ -8,13 +8,13 @@ import com.linoz.petadoptioncatalogue.domain.PetCategory;
  */
 public interface PetBuilder {
 
-    public void buildId(String id);
+    public PetBuilder buildId(String id);
 
-    public void buildName(String name);
+    public PetBuilder buildName(String name);
 
-    public void buildType(PetCategory petCategory);
+    public PetBuilder buildType(PetCategory petCategory);
 
-    public void buildAge(int age);
+    public PetBuilder buildAge(int age);
 
     public Pet getPet();
 }

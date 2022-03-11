@@ -15,7 +15,7 @@ import java.util.List;
 public interface PetRepository extends MongoRepository<Pet, String> {
 
     @Query("{name:'?0'}")
-    List<Pet> findPetByName(String name);
+    List<Pet> findByName(String name);
 
     public long count();
 }

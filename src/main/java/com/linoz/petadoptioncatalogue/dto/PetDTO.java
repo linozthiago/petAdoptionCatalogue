@@ -5,19 +5,21 @@ import com.linoz.petadoptioncatalogue.builder.PetBuilderImpl;
 import com.linoz.petadoptioncatalogue.domain.Pet;
 import com.linoz.petadoptioncatalogue.domain.PetCategory;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by linoz on 12/17/21
  */
 
 @Getter
+@Setter
 public class PetDTO {
     private String id;
     private String name;
     private PetCategory type;
     private int age;
 
-    private PetBuilder petBuilder;
+    private final PetBuilder petBuilder;
 
     public PetDTO() {
         this.petBuilder = new PetBuilderImpl();
@@ -29,9 +31,9 @@ public class PetDTO {
      * @return this
      */
     public PetDTO createPet() {
-        petBuilder.buildName(name);
-        petBuilder.buildType(type);
-        petBuilder.buildAge(age);
+        petBuilder.buildName(name)
+        .buildType(type)
+        .buildAge(age);
 
         return this;
     }
@@ -42,10 +44,10 @@ public class PetDTO {
      * @return this
      */
     public PetDTO updatePet() {
-        petBuilder.buildId(id);
-        petBuilder.buildName(name);
-        petBuilder.buildType(type);
-        petBuilder.buildAge(age);
+        petBuilder.buildId(id)
+        .buildName(name)
+        .buildType(type)
+        .buildAge(age);
 
         return this;
     }

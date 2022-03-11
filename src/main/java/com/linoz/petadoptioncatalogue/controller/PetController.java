@@ -4,7 +4,8 @@ import com.linoz.petadoptioncatalogue.domain.Pet;
 import com.linoz.petadoptioncatalogue.dto.PetDTO;
 import com.linoz.petadoptioncatalogue.service.PetService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,7 +25,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PetController {
 
-    @Autowired
     private final PetService service;
 
     @GetMapping("/all")
@@ -35,21 +34,24 @@ public class PetController {
 
     @GetMapping("/searchFor/{name}")
     public List<Pet> findByName(@PathVariable("name") String name) {
-        return service.findByName(name);
+        return service.findPetByName(name);
     }
 
     @PostMapping("/create")
-    public void create(@RequestBody PetDTO petDTO) {
-        service.save(petDTO.createPet().build());
+    public ResponseEntity<Pet> create(@RequestBody PetDTO petDTO) {
+        return new ResponseEntity<>(service.save(petDTO.createPet().build()), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/remove")
-    public void remove(@RequestBody PetDTO petDTO) {
+    public ResponseEntity<Void> remove(@RequestBody PetDTO petDTO) {
         service.delete(petDTO.removePet().build());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update")
-    public void update(@RequestBody PetDTO petDTO) {
+    public ResponseEntity<Void> update(@RequestBody PetDTO petDTO) {
         service.update(petDTO.updatePet().build());
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

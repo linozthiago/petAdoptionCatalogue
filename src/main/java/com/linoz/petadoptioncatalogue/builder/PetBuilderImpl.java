@@ -10,30 +10,34 @@ import com.linoz.petadoptioncatalogue.domain.PetCategory;
  */
 public class PetBuilderImpl implements PetBuilder{
 
-    private Pet pet;
+    private final Pet pet;
 
     public PetBuilderImpl() {
         this.pet = new Pet();
     }
 
     @Override
-    public void buildId(String id) {
+    public PetBuilder buildId(String id) {
         this.pet.setId(id);
+        return this;
     }
 
     @Override
-    public void buildName(String name) {
+    public PetBuilder buildName(String name) {
         this.pet.setName(name);
+        return this;
     }
 
     @Override
-    public void buildType(PetCategory petCategory) {
+    public PetBuilder buildType(PetCategory petCategory) {
         this.pet.setType(petCategory);
+        return this;
     }
 
     @Override
-    public void buildAge(int age) {
+    public PetBuilder buildAge(int age) {
         this.pet.setAge(age);
+        return this;
     }
 
     @Override

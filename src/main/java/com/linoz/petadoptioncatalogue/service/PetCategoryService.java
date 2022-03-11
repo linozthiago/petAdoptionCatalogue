@@ -3,7 +3,7 @@ package com.linoz.petadoptioncatalogue.service;
 import com.linoz.petadoptioncatalogue.domain.PetCategory;
 import com.linoz.petadoptioncatalogue.exception.NotFoundRequestException;
 import com.linoz.petadoptioncatalogue.repository.PetCategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +13,10 @@ import java.util.List;
  */
 
 @Service
+@RequiredArgsConstructor
 public class PetCategoryService {
 
-    @Autowired
-    private PetCategoryRepository repository;
+    private final PetCategoryRepository repository;
 
     public void save(PetCategory petCategory) {
         repository.save(petCategory);
